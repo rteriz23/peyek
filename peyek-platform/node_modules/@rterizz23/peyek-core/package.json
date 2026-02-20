@@ -1,0 +1,9 @@
+{
+    "name": "@rterizz23/peyek-core",
+    "version": "1.0.0",
+    "description": "Core utilities and modal system for P.E.Y.E.K",
+    "main": "index.js",
+    "publishConfig": {
+        "access": "public"
+    }
+}

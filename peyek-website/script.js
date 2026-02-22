@@ -196,7 +196,7 @@ async function pingAnalytics() {
     if (now - _lastPingTime < PING_THROTTLE_MS) return; // rate guard
     _lastPingTime = now;
 
-    const BACKEND = 'http://localhost:3000'; // Update to deployed URL
+    const BACKEND = 'https://api.peyek.pcode.my.id'; // Recommended subdomain for backend
 
     // A03: sanitize all values before sending
     const payload = {

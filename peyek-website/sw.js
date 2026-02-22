@@ -2,7 +2,7 @@
  * P.E.Y.E.K Website Service Worker v1.0
  * Cache-first for static assets, network-first for pages
  */
-const CACHE = 'peyek-site-v1';
+const CACHE = 'peyek-site-v2';
 const ASSETS = [
     '/',
     '/index.html',

@@ -1,6 +1,6 @@
 {
     "name": "@rterizz23/peyek-table",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Sortable, searchable, paginated data table plugin for P.E.Y.E.K",
     "main": "index.js",
     "type": "module",

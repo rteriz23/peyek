@@ -1,10 +1,17 @@
 {
     "name": "@rterizz23/peyek-pwa",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Instant PWA toolkit for P.E.Y.E.K — works with Laravel, Yii, Yii2, CodeIgniter & Android",
     "main": "index.js",
     "type": "module",
-    "keywords": ["pwa", "service-worker", "peyek", "laravel", "yii", "codeigniter"],
+    "keywords": [
+        "pwa",
+        "service-worker",
+        "peyek",
+        "laravel",
+        "yii",
+        "codeigniter"
+    ],
     "publishConfig": {
         "access": "public"
     }

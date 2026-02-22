@@ -20,8 +20,7 @@ const ALLOWED_ORIGINS = [
     'http://localhost',
     'http://localhost:3000',
     'http://127.0.0.1',
-    // Add your production domain here:
-    // 'https://peyek.yourdomain.com',
+    'https://peyek.pcode.my.id',
 ];
 
 /**

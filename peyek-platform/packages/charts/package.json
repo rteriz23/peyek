@@ -1,6 +1,6 @@
 {
     "name": "@rterizz23/peyek-charts",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Lightweight zero-dependency chart system for P.E.Y.E.K (Line, Bar, Donut via Canvas API)",
     "main": "index.js",
     "type": "module",

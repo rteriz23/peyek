@@ -1,10 +1,10 @@
 {
     "name": "@rterizz23/peyek-pdf-viewer",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "PDF viewer wrapper for P.E.Y.E.K",
     "main": "index.js",
     "dependencies": {
-        "@rterizz23/peyek-core": "^1.0.0"
+        "@rterizz23/peyek-core": "^2.0.0"
     },
     "publishConfig": {
         "access": "public"

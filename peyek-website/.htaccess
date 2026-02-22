@@ -19,7 +19,7 @@
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
         font-src 'self' https://fonts.gstatic.com; \
         img-src 'self' data: https://img.shields.io https://api.npmjs.org; \
-        connect-src 'self' http://localhost:3000 https://api.npmjs.org https://shields.io; \
+        connect-src 'self' https://api.npmjs.org https://shields.io; \
         object-src 'none'; \
         base-uri 'self'; \
         form-action 'self'; \

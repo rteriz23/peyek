@@ -58,6 +58,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="peyek.png">
+    <link rel="apple-touch-icon" href="peyek.png">
 </head>
 
 <body>
@@ -65,7 +69,11 @@
     <!-- ─── Navbar ─────────────────────────────────────────────────────── -->
     <nav class="navbar" id="navbar">
         <div class="container nav-content">
-            <div class="logo">P.E.Y.E.K<span>.</span></div>
+            <a href="index.html" class="logo"
+                style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit;">
+                <img src="peyek.png" alt="P.E.Y.E.K Logo" class="nav-logo-img" height="32px" width="32px">
+                P.E.Y.E.K<span>.</span>
+            </a>
 
             <div class="nav-links" id="nav-links">
                 <a href="#features">Features</a>
@@ -96,10 +104,10 @@
         <div class="blob blob-3"></div>
 
         <div class="container hero-content">
-            <div class="badge">v1.5.0 is out! 🚀 Now with PWA & Analytics</div>
+            <div class="badge">v2.0.0 IS LIVE! 🚀 Scaling Instantly</div>
             <h1 class="hero-title">
-                Bangun dengan <span class="gradient-text text-berani">Berani.</span><br>
-                Skala Secara <span class="gradient-text text-instan">Instan.</span>
+                Bangun dengan <span class="gradient-text text-berani">Mudah.</span><br>
+                Skala Secara <span class="gradient-text text-instan">Simple.</span>
             </h1>
             <p class="hero-subtitle">
                 EreacThohir & P.E.Y.E.K: Framework fullstack berkinerja tinggi untuk
@@ -158,6 +166,90 @@
         </div>
     </header>
 
+    <!-- ─── Partnership Section ──────────────────────────────────────────── -->
+    <section class="partnership">
+        <div class="container">
+            <div class="partnership-wrapper glass">
+                <!-- Left: Content -->
+                <div class="partnership-content">
+                    <div class="section-badge" style="margin-bottom: 20px;">🤝 Official Partner</div>
+                    <h2 style="font-size:2.4rem; font-weight:800; line-height:1.2; margin-bottom:16px;">
+                        In Partnership with<br><span class="gradient-text">EreacThohir</span>
+                    </h2>
+                    <p
+                        style="color:var(--text-muted); line-height:1.7; font-size:1.05rem; margin-bottom:32px; max-width:420px;">
+                        P.E.Y.E.K bekerjasama dengan ekosistem EreacThohir untuk menghadirkan skalabilitas instan dan
+                        keandalan tingkat perusahaan bagi pengembang modern.
+                    </p>
+                    <div class="partner-features">
+                        <div class="partner-feature"><span class="feature-dot"></span> Enterprise-grade reliability
+                        </div>
+                        <div class="partner-feature"><span class="feature-dot"></span> Seamless SDK integration</div>
+                        <div class="partner-feature"><span class="feature-dot"></span> Official ecosystem support</div>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:36px;">
+                        <a href="https://ereactthohir.pcode.my.id/" target="_blank" class="btn btn-primary">Kunjungi
+                            Ekosistem</a>
+                        <a href="docs.html" class="btn btn-outline">Integrasi SDK</a>
+                    </div>
+                </div>
+
+                <!-- Right: Logo Card -->
+                <div class="partnership-logo-panel">
+                    <div class="partnership-logo-card">
+                        <div class="logo-glow-ring"></div>
+                        <img src="assets/ereactthohir-logo.png" alt="EreacThohir Logo" class="partner-logo-img">
+                        <p class="partner-logo-label">EreacThohir Ecosystem</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Integrations ─────────────────────────────────────────────────── -->
+    <section id="integrations" class="integrations">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">🔌 Integrations</div>
+                <h2>Works with <span class="gradient-text">Your Stack</span></h2>
+                <p>Drop P.E.Y.E.K into any project — PHP, Node.js, or native Android.</p>
+            </div>
+
+            <div class="integration-grid">
+                <a href="docs.html#laravel" class="integration-card glass">
+                    <div class="integration-logo">🟥</div>
+                    <div class="integration-name">Laravel</div>
+                    <div class="integration-desc">Blade views · Vite · Artisan</div>
+                </a>
+                <a href="docs.html#yii2" class="integration-card glass">
+                    <div class="integration-logo">🟦</div>
+                    <div class="integration-name">Yii2</div>
+                    <div class="integration-desc">Asset Bundles · Views · Gii</div>
+                </a>
+                <a href="docs.html#yii" class="integration-card glass">
+                    <div class="integration-logo">🔷</div>
+                    <div class="integration-name">Yii 1.x</div>
+                    <div class="integration-desc">CClientScript · Layouts</div>
+                </a>
+                <a href="docs.html#codeigniter" class="integration-card glass">
+                    <div class="integration-logo">🟠</div>
+                    <div class="integration-name">CodeIgniter</div>
+                    <div class="integration-desc">CI3 &amp; CI4 · Views · Public</div>
+                </a>
+                <a href="android.html" class="integration-card glass">
+                    <div class="integration-logo">🤖</div>
+                    <div class="integration-name">Android</div>
+                    <div class="integration-desc">TWA · WebView · Play Store</div>
+                </a>
+                <a href="docs.html#nodejs" class="integration-card glass">
+                    <div class="integration-logo">🟢</div>
+                    <div class="integration-name">Node.js</div>
+                    <div class="integration-desc">ESM · CommonJS · Rollup · Vite</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- ─── Stats Section ────────────────────────────────────────────────── -->
     <section class="stats-section" id="stats">
         <div class="container">
@@ -205,18 +297,21 @@
                 <div class="feature-card glass">
                     <div class="feature-icon">🧩</div>
                     <h3>Drag &amp; Drop UI</h3>
-                    <p>Embeddable web builder inside your own SaaS. Let your users create pages without writing code.
+                    <p>Embeddable web builder inside your own SaaS. Let your users create pages without writing
+                        code.
                     </p>
                 </div>
                 <div class="feature-card glass">
                     <div class="feature-icon">📄</div>
                     <h3>PDF Auto Previewer</h3>
-                    <p>Safely isolated PDF rendering wrapper. Highly optimized Web Worker execution out of the box.</p>
+                    <p>Safely isolated PDF rendering wrapper. Highly optimized Web Worker execution out of the box.
+                    </p>
                 </div>
                 <div class="feature-card glass">
                     <div class="feature-icon">📲</div>
                     <h3>Instant PWA</h3>
-                    <p>One function call to register a service worker, inject a manifest, and enable Install App prompt.
+                    <p>One function call to register a service worker, inject a manifest, and enable Install App
+                        prompt.
                     </p>
                 </div>
                 <div class="feature-card glass">
@@ -227,7 +322,8 @@
                 <div class="feature-card glass">
                     <div class="feature-icon">📋</div>
                     <h3>Smart Data Table</h3>
-                    <p>Sortable, searchable, and paginated data table that renders in any container. Pure DOM magic.</p>
+                    <p>Sortable, searchable, and paginated data table that renders in any container. Pure DOM magic.
+                    </p>
                 </div>
                 <div class="feature-card glass">
                     <div class="feature-icon">✏️</div>
@@ -328,51 +424,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ─── Integrations ─────────────────────────────────────────────────── -->
-    <section id="integrations" class="integrations">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">🔌 Integrations</div>
-                <h2>Works with <span class="gradient-text">Your Stack</span></h2>
-                <p>Drop P.E.Y.E.K into any project — PHP, Node.js, or native Android.</p>
-            </div>
-
-            <div class="integration-grid">
-                <a href="docs.html#laravel" class="integration-card glass">
-                    <div class="integration-logo">🟥</div>
-                    <div class="integration-name">Laravel</div>
-                    <div class="integration-desc">Blade views · Vite · Artisan</div>
-                </a>
-                <a href="docs.html#yii2" class="integration-card glass">
-                    <div class="integration-logo">🟦</div>
-                    <div class="integration-name">Yii2</div>
-                    <div class="integration-desc">Asset Bundles · Views · Gii</div>
-                </a>
-                <a href="docs.html#yii" class="integration-card glass">
-                    <div class="integration-logo">🔷</div>
-                    <div class="integration-name">Yii 1.x</div>
-                    <div class="integration-desc">CClientScript · Layouts</div>
-                </a>
-                <a href="docs.html#codeigniter" class="integration-card glass">
-                    <div class="integration-logo">🟠</div>
-                    <div class="integration-name">CodeIgniter</div>
-                    <div class="integration-desc">CI3 &amp; CI4 · Views · Public</div>
-                </a>
-                <a href="android.html" class="integration-card glass">
-                    <div class="integration-logo">🤖</div>
-                    <div class="integration-name">Android</div>
-                    <div class="integration-desc">TWA · WebView · Play Store</div>
-                </a>
-                <a href="docs.html#nodejs" class="integration-card glass">
-                    <div class="integration-logo">🟢</div>
-                    <div class="integration-name">Node.js</div>
-                    <div class="integration-desc">ESM · CommonJS · Rollup · Vite</div>
-                </a>
-            </div>
-        </div>
     </section>
 
     <!-- ─── PWA Demo Section ──────────────────────────────────────────────── -->
@@ -485,8 +536,6 @@
 
                 <!-- Right: Info -->
                 <div class="creator-info-col">
-
-                    <!-- Name -->
                     <h2 class="creator-name">Ruly Rizki Perdana</h2>
                     <div class="creator-certs code-font">
                         S.Kom · MOS · MTA · MTCNA · OCA · GCE · GCCS · GCF · CCEP ·
@@ -542,20 +591,22 @@
                         <span class="skill-tag accent">GOOGLE K-12</span>
                     </div>
                 </div>
-
             </div>
         </div>
+    </section>
+
     </section>
 
     <footer>
         <div class="container footer-content">
             <div class="footer-brand">
-                <h3>P.E.Y.E.K<span>.</span></h3>
+                <div class="footer-logo">
+                    <img src="peyek.png" alt="P.E.Y.E.K Logo" class="footer-logo-img" height="32px" width="32px">
+                    <h3>P.E.Y.E.K<span>.</span></h3>
+                </div>
                 <p>Platform Extensible Yielding Engineering Kit.</p>
                 <p class="copyright">
-                    Created by <strong>rteriz23</strong><br>
-                    RULY RIZKI PERDANA S.KOM<br>
-                    © 2026 Peyek OSS. All rights reserved.
+                    © 2026 Peyek Platform. All rights reserved.
                 </p>
                 <div class="footer-social">
                     <a href="https://github.com/rteriz23/peyek" target="_blank" class="social-link" aria-label="GitHub">

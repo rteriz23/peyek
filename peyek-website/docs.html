@@ -128,6 +128,17 @@
             display: block;
         }
 
+        .badge-v2 {
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
         @media (max-width: 768px) {
             .docs-container {
                 flex-direction: column;
@@ -156,8 +167,7 @@
                 <a href="index.html#features">Features</a>
                 <a href="docs.html" class="active" style="color: var(--text-main);">Docs</a>
                 <a href="index.html#pricing">Pricing</a>
-                <a href="https://wa.me/6281328306288?text=Halo%20Admin,%20saya%20butuh%20bantuan%20terkait%20P.E.Y.E.K."
-                    target="_blank" class="btn btn-outline">Support</a>
+                <a href="https://wa.me/6281328306288" target="_blank" class="btn btn-outline">Support</a>
             </div>
         </div>
     </nav>
@@ -167,122 +177,119 @@
         <aside class="docs-sidebar">
             <h4>Getting Started</h4>
             <a href="#introduction">Introduction</a>
-            <a href="#installation">Installation (CLI)</a>
-            <a href="#cdn-usage">CDN / Direct Usage</a>
+            <a href="#installation">Installation (v2.0.0)</a>
+            <a href="#cdn-usage">CDN Usage</a>
 
-            <h4>Core SDK</h4>
+            <h4>New Features v2.0.0</h4>
+            <a href="#security-hardened">OWASP Security <span class="badge-v2">NEW</span></a>
+            <a href="#protected-content">Content Protection <span class="badge-v2">NEW</span></a>
+            <a href="#pwa-manager">PWA & Offline</a>
+
+            <h4>Core & UI SDK</h4>
             <a href="#core-init">Initialization</a>
-            <a href="#auto-modal">Auto Modal</a>
-            <a href="#api-wrapper">API Wrapper (CSRF)</a>
+            <a href="#tables-charts">Tables & Charts <span class="badge-v2">NEW</span></a>
+            <a href="#form-builder">Form Builder <span class="badge-v2">NEW</span></a>
 
-            <h4>Premium Tools</h4>
-            <a href="#ui-builder">UI Web Builder</a>
-            <a href="#pdf-viewer">PDF Viewer</a>
+            <h4>Native Integration</h4>
+            <a href="#android-guide">Android Integration <span class="badge-v2">NEW</span></a>
+            <a href="#php-frameworks">PHP Frameworks</a>
         </aside>
 
         <!-- Content -->
         <main class="docs-content">
 
             <section id="introduction" class="docs-section">
-                <h1>Documentation</h1>
-                <p>Welcome to the official documentation for <strong>P.E.Y.E.K</strong> (Platform Extensible Yielding
-                    Engineering Kit). Whether you're integrating into a legacy CodeIgniter/Yii app or building a fresh
-                    React project, our SDK is designed to be completely framework-agnostic.</p>
+                <h1>Documentation v2.0.0</h1>
+                <p>Welcome to <strong>P.E.Y.E.K 2.0.0</strong>. This version adds comprehensive security hardening, new
+                    UI components (Charts, Tables, Forms), and optimized Android integration paths.</p>
+            </section>
+
+            <section id="security-hardened" class="docs-section">
+                <h2>OWASP Security Hardening <span class="badge-v2">NEW</span></h2>
+                <p>P.E.Y.E.K 2.0.0 is built with <strong>OWASP Top 10</strong> compliance in mind. Our Node.js backend
+                    and client SDK include:</p>
+                <ul>
+                    <li><strong>A03 Injection Defense</strong>: Built-in <code>xssSafe()</code> and
+                        <code>sanitizeInput()</code> helpers.
+                    </li>
+                    <li><strong>A05 Security Misconfiguration</strong>: Pre-configured Helmet.js and .htaccess security
+                        headers.</li>
+                    <li><strong>A07 Authentication Failures</strong>: Multiple layers of rate limiting (Global +
+                        Analytics).</li>
+                    <li><strong>Security Nonces</strong>: Support for strict CSP nonces in <code>index.html</code>.</li>
+                </ul>
+            </section>
+
+            <section id="protected-content" class="docs-section">
+                <h2>Content Protection <span class="badge-v2">NEW</span></h2>
+                <p>Protect your intellectual property with our new obfuscation layer:</p>
+                <ul>
+                    <li><strong>Canvas Photo Rendering</strong>: Sensitive images are rendered to pixels on a canvas,
+                        disabling "Right-Click Save As".</li>
+                    <li><strong>DevTools Detection</strong>: Automatically blurs sensitive UI if DevTools is opened.
+                    </li>
+                    <li><strong>Screen Protection</strong>: CSS print blackout prevents easy screenshots/PDF printing.
+                    </li>
+                    <li><strong>Input Sanitization</strong>: URL parameters are audited for injection patterns on load.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="android-guide" class="docs-section">
+                <h2>Android Integration Guide <span class="badge-v2">NEW</span></h2>
+                <p>Deploy your P.E.Y.E.K web apps to Android smoothly.</p>
+
+                <h3>Option 1: Trusted Web Activity (TWA)</h3>
+                <p>The recommended way to publish to Google Play. It uses Chrome to run your PWA in a standalone window.
+                </p>
+                <div class="code-block">
+                    <code>npx @bubblewrap/cli init --manifest https://peyek.pcode.my.id/manifest.json
+npx @bubblewrap/cli build</code>
+                </div>
+
+                <h3>Option 2: Native WebView Integration</h3>
+                <p>Best for adding P.E.Y.E.K elements to existing Android apps. Use
+                    <code>s.setJavaScriptEnabled(true)</code> and <code>s.setDomStorageEnabled(true)</code> in your
+                    <code>WebSettings</code>.</p>
+                <div class="code-block">
+                    <code>// Java Example
+WebView webView = findViewById(R.id.webview);
+webView.getSettings().setDomStorageEnabled(true);
+webView.loadUrl("https://peyek.pcode.my.id");</code>
+                </div>
+            </section>
+
+            <section id="tables-charts" class="docs-section">
+                <h2>Advanced UI: Tables & Charts <span class="badge-v2">NEW</span></h2>
+                <p>We've added powerful, zero-dependency data visualization components.</p>
+                <div class="code-block">
+                    <code>// Charting example
+PeyekCharts.bar('#myChart', {
+    labels: ['Sales', 'Growth', 'Retention'],
+    data: [75, 82, 90]
+});
+
+// Data Table example
+new PeyekTable('#table', {
+    data: users,
+    searchable: true,
+    pagination: true
+});</code>
+                </div>
             </section>
 
             <section id="installation" class="docs-section">
-                <h2>Installation (via CLI)</h2>
-                <p>The fastest way to start a new project from scratch is using our CLI scaffolding tool. It
-                    automatically generates a boilerplate configured with our latest bundles.</p>
+                <h2>Installation (CLI)</h2>
                 <div class="code-block">
-                    <code class="keyword">npx</code> <code class="string">create-peyek-app</code>
-                    <code>my-new-project</code>
-                </div>
-                <p>Follow the prompt to choose your framework (HTML, Laravel, Vue, etc).</p>
-            </section>
-
-            <section id="cdn-usage" class="docs-section">
-                <h2>CDN / Direct Script Inclusion</h2>
-                <p>If you are injecting P.E.Y.E.K into an existing PHP application (like Laravel Blade or Yii View), you
-                    can simply include the built UMD bundles in your <code>&lt;head&gt;</code> tag:</p>
-                <div class="code-block">
-                    <code>&lt;!-- Core Module --&gt;
-&lt;script src="https://unpkg.com/@rterizz23/peyek-core@latest/dist/peyek.core.min.js"&gt;&lt;/script&gt;
-
-&lt;!-- UI Builder Module (Optional) --&gt;
-&lt;script src="https://unpkg.com/@rterizz23/peyek-ui-builder@latest/dist/peyek.ui-builder.min.js"&gt;&lt;/script&gt;
-
-&lt;!-- PDF Viewer Module (Optional) --&gt;
-&lt;script src="https://unpkg.com/@rterizz23/peyek-pdf-viewer@latest/dist/peyek.pdf-viewer.min.js"&gt;&lt;/script&gt;</code>
+                    <code>npx create-peyek-app my-new-project</code>
                 </div>
             </section>
 
             <section id="core-init" class="docs-section">
-                <h2>Core Initialization</h2>
-                <p>The core must be initialized before using the API tools, especially in secure environments like
-                    Laravel or Yii where CSRF tokens are strictly required. P.E.Y.E.K automatically scans your HTML meta
-                    tags for CSRF tokens.</p>
+                <h2>Initialization</h2>
                 <div class="code-block">
-                    <code><span class="comment">// Standard Initialization</span>
-PeyekCore.peyek.init();
-
-<span class="comment">// Premium SaaS Initialization (Requires valid license key from peyek.com)</span>
-PeyekCore.peyek.init({
-    license: 'PYK-A1B2C3D4E5' 
-});</code>
-                </div>
-            </section>
-
-            <section id="auto-modal" class="docs-section">
-                <h2>Auto Modal</h2>
-                <p>Generate beautiful, mobile-responsive modals via Javascript without needing HTML boilerplate or
-                    Bootstrap.</p>
-                <div class="code-block">
-                    <code>PeyekCore.Modal.show({
-    title: 'Payment Success',
-    content: '&lt;p&gt;Your transaction was successful. Thank you!&lt;/p&gt;',
-    closeOnClickOutside: true
-});</code>
-                </div>
-            </section>
-
-            <section id="api-wrapper" class="docs-section">
-                <h2>API Wrapper</h2>
-                <p>P.E.Y.E.K provides a lightweight fetch wrapper that automatically appends the framework's CSRF token
-                    to every POST request.</p>
-                <div class="code-block">
-                    <code><span class="keyword">await</span> PeyekCore.API.post('/api/save-user', {
-    name: 'John Doe',
-    role: 'Admin'
-});</code>
-                </div>
-            </section>
-
-            <section id="ui-builder" class="docs-section">
-                <h2>UI Web Builder</h2>
-                <p>Embed our drag-and-drop web builder into your application. Create an empty div container and pass its
-                    ID to the constructor.</p>
-                <div class="code-block">
-                    <code>&lt;div id="my-builder"&gt;&lt;/div&gt;
-
-&lt;script&gt;
-    const builder = new PeyekUIBuilder.UIBuilder('my-builder');
-    builder.render();
-&lt;/script&gt;</code>
-                </div>
-            </section>
-
-            <section id="pdf-viewer" class="docs-section">
-                <h2>PDF Viewer</h2>
-                <p>Safely render PDFs using our optimized wrapper around Mozilla's <code>pdf.js</code>. The worker files
-                    are handled automatically underneath.</p>
-                <div class="code-block">
-                    <code>&lt;div id="pdf-container" style="height: 600px;"&gt;&lt;/div&gt;
-
-&lt;script&gt;
-    const viewer = new PeyekPDFViewer.PDFViewer('pdf-container');
-    viewer.load('https://example.com/sample.pdf');
-&lt;/script&gt;</code>
+                    <code>import { PeyekCore } from '@rterizz23/peyek-core';
+PeyekCore.init({ license: 'PYK-V2-...' });</code>
                 </div>
             </section>
 
@@ -298,7 +305,8 @@ PeyekCore.peyek.init({
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" nonce="PEYEK2026"></script>
+    <script src="protect.js" nonce="PEYEK2026"></script>
 </body>
 
 </html>

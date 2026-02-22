@@ -1,125 +1,81 @@
-# PWA Integration Guide — Android (TWA & WebView)
+# P.E.Y.E.K v2.0.0 — Android Integration Guide (TWA & WebView)
 
-**Package**: `@rterizz23/peyek-pwa`
+Integrate your P.E.Y.E.K web apps into native Android environments with full security support.
 
 ## Option A: Trusted Web Activity (TWA) — Recommended
 
-TWA wraps your existing PWA website into a native Android app published on the Play Store, with **zero extra code** on the Android side.
+TWA is the fastest way to publish to the Play Store. It uses a high-performance Chrome custom tab to wrap your PWA.
 
-### Prerequisites
+### 1. Build Requirements
+- Your PWA must have a valid `manifest.json` and a Service Worker (already in P.E.Y.E.K 2.0.0).
+- Score 100/100 on PWA Lighthouse.
 
-- Your website must score **PWA-ready** (manifest.json + service worker working)
-- Chrome 72+ supports TWA
-- Requires your domain and an HTTPS-served site
-
-### 1. Install Bubblewrap CLI
-
+### 2. Simple Deployment (Bubblewrap)
 ```bash
-npm install -g @bubblewrap/cli
-bubblewrap --version
+npx @bubblewrap/cli init --manifest https://peyek.pcode.my.id/manifest.json
+npx @bubblewrap/cli build
 ```
 
-### 2. Initialize TWA Project
-
-```bash
-mkdir my-twa && cd my-twa
-bubblewrap init --manifest https://yourdomain.com/manifest.json
-```
-
-Bubblewrap will prompt you for:
-- Package name (e.g., `com.yourname.myapp`)
-- App name
-- Signing key (you can generate one)
-
-### 3. Build the APK / AAB
-
-```bash
-bubblewrap build
-```
-
-Output:
-- `app-release-signed.apk` — side-loadable APK
-- `app-release-bundle.aab` — Google Play upload format
-
-### 4. Digital Asset Links (Required for TWA)
-
-To link your Android app with your domain, add this file:
-`https://yourdomain.com/.well-known/assetlinks.json`
-
+### 3. Native Security Verification
+Ensure `assetlinks.json` is present at `.well-known/assetlinks.json`:
 ```json
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "com.yourname.myapp",
-    "sha256_cert_fingerprints": ["AA:BB:CC:..."]
+    "package_name": "com.rterizz23.peyek",
+    "sha256_cert_fingerprints": ["YOUR_SHA256_HERE"]
   }
 }]
 ```
 
-Get your fingerprint with:
-```bash
-keytool -list -v -keystore my-keystore.jks
-```
-
 ---
 
-## Option B: Android WebView (Manual)
+## Option B: Native Android WebView (Full Control)
 
-For loading your P.E.Y.E.K-powered web app inside a native Android WebView:
+Ideal for integrating P.E.Y.E.K components into existing Android UI.
 
-### `MainActivity.java`
+### 1. Security-Hardened WebView Config
 
 ```java
-import android.webkit.*;
-
+// MainActivity.java
 WebView webView = findViewById(R.id.webview);
-WebSettings settings = webView.getSettings();
-settings.setJavaScriptEnabled(true);
-settings.setDomStorageEnabled(true);       // Required for localStorage (PeyekTheme)
-settings.setDatabaseEnabled(true);        // Required for offline data
-settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+WebSettings s = webView.getSettings();
 
-// Allow service worker scope
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-    ServiceWorkerController swController = ServiceWorkerController.getInstance();
-    swController.setServiceWorkerClient(new ServiceWorkerClient() {
-        @Override
-        public WebResourceResponse shouldInterceptRequest(WebResourceRequest request) {
-            return null; // Let SW handle it
-        }
-    });
-}
-
-webView.loadUrl("https://yourdomain.com");
+s.setJavaScriptEnabled(true);
+s.setDomStorageEnabled(true); // Mandatory for PeyekTheme & LocalStorage
+s.setDatabaseEnabled(true);
+s.setAllowFileAccess(false); // Security: disable file access
+s.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW); // Security: Force HTTPS
 ```
 
-### `AndroidManifest.xml`
+### 2. Handling Content Protection
+P.E.Y.E.K 2.0.0 uses Canvas and Nonces. In WebView, ensure:
+- **Media Playback**: Set `s.setMediaPlaybackRequiresUserGesture(false);` if using auto-playing alerts.
+- **Hardware Acceleration**: Must be **ON** for `@rterizz23/peyek-charts` and `protect.js` canvas rendering to work smoothly.
 
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-<application
-    android:usesCleartextTraffic="false"
-    ...>
+### 3. Bridge Strategy (Optional)
+If you need to call native Android toasts from P.E.Y.E.K:
+```java
+webView.addJavascriptInterface(new Object() {
+    @JavascriptInterface
+    public void showToast(String msg) {
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+    }
+}, "AndroidBridge");
 ```
-
-### Notes for WebView PWA
-
-- Service workers only work with **HTTPS** URLs in WebView
-- Use `setDomStorageEnabled(true)` so `PeyekTheme` and `PeyekForm` persistent state works
-- For local development, use `http://10.0.2.2:PORT` (Android emulator localhost alias)
+Then in JS:
+```js
+if (window.AndroidBridge) window.AndroidBridge.showToast("Hello from PEYEK!");
+```
 
 ---
 
-## Verify PWA Score
+## 🛡️ Security Best Practices for Android
+1. **Always use HTTPS**: Service Workers and PWA features will fail on HTTP in WebView.
+2. **Handle Nonces**: If your backend emits a dynamic CSP nonce, ensure your WebView client injects it if you modify the HTML dynamically.
+3. **CSP**: Ensure your Android network security config (`res/xml/network_security_config.xml`) allows cleartext traffic **only** for localhost if debugging.
 
-Before building the Android app, verify your PWA:
+---
 
-```bash
-npx lighthouse https://yourdomain.com --output=html --output-path=report.html
-open report.html
-```
-
-Aim for PWA score ≥ 90 before packaging as TWA.
+Made with ❤️ for the Android Community by **rteriz23**.

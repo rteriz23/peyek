@@ -222,6 +222,35 @@ async function pingAnalytics() {
     }
 }
 
+// ─── Track Download Event — IP, Device, Timestamp ────────────────────────────
+async function trackDownloadEvent(pkgName = 'peyek-v2-bundle') {
+    const BACKEND = 'https://api.peyek.pcode.my.id';
+
+    const payload = {
+        pkg: pkgName,
+        ua: sanitizeInput(navigator.userAgent, 300)
+    };
+
+    try {
+        await secureFetch(`${BACKEND}/api/analytics/track-download`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+        console.log('[PEYEK] Download tracked successfully');
+    } catch (err) {
+        console.warn('[PEYEK] Failed to track download:', err);
+    }
+}
+
+// Attach listener to download button
+const npmBtn = document.getElementById('npm-download-btn');
+if (npmBtn) {
+    npmBtn.addEventListener('click', () => {
+        trackDownloadEvent('@rterizz23/full-stack-upgrade');
+    });
+}
+
 // ─── IntersectionObserver for Stats Counters ─────────────────────────────────
 const statsSection = document.getElementById('stats');
 let countersStarted = false;

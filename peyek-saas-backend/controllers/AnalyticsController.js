@@ -1,4 +1,18 @@
 import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const LOG_FILE = path.join(__dirname, '../logs/downloads.csv');
+
+// Ensure directory and log file exists
+if (!fs.existsSync(path.dirname(LOG_FILE))) {
+    fs.mkdirSync(path.dirname(LOG_FILE), { recursive: true });
+}
+if (!fs.existsSync(LOG_FILE)) {
+    fs.writeFileSync(LOG_FILE, 'Timestamp,Package,IP_Hash,Device,Region,UA\n');
+}
 
 /**
  * Analytics Controller
@@ -89,5 +103,34 @@ export class AnalyticsController {
             uptime: process.uptime(),
             generatedAt: new Date().toISOString(),
         });
+    }
+
+    /**
+     * POST /api/analytics/track-download
+     * Body: { package: string, ua?: string }
+     */
+    static async trackDownload(req, res) {
+        const { pkg = 'peyek-core', ua = '' } = req.body;
+
+        // Get visitor IP
+        const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+        const ipHash = crypto.createHash('sha256').update(ip).digest('hex').slice(0, 12);
+
+        // Basic Device Detection
+        let device = 'Desktop';
+        if (/mobile/i.test(ua)) device = 'Mobile';
+        if (/tablet/i.test(ua)) device = 'Tablet';
+
+        // Geolocation (Placeholder - would use a library or API in full prod)
+        let region = 'Unknown';
+
+        const timestamp = new Date().toISOString();
+        const logEntry = `${timestamp},${pkg},${ipHash},${device},${region},"${ua.replace(/"/g, '""')}"\n`;
+
+        fs.appendFile(LOG_FILE, logEntry, (err) => {
+            if (err) console.error('[ERROR] Failed to write download log:', err);
+        });
+
+        return res.json({ success: true, timestamp });
     }
 }

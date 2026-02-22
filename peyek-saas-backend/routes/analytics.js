@@ -9,6 +9,7 @@ import { AnalyticsController } from '../controllers/AnalyticsController.js';
 const router = Router();
 
 router.post('/track', AnalyticsController.track);
+router.post('/track-download', AnalyticsController.trackDownload);
 router.get('/stats', AnalyticsController.stats);
 
 export default router;

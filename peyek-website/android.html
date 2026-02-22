@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Integration Guide | P.E.Y.E.K</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Docs Specific Styles */
+        body {
+            padding-top: 80px;
+        }
+
+        .docs-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+            padding: 40px 24px;
+        }
+
+        .docs-sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+            border-right: 1px solid var(--glass-border);
+            padding-right: 20px;
+        }
+
+        .docs-sidebar h4 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .docs-sidebar a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .docs-sidebar a:hover,
+        .docs-sidebar a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .docs-content {
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .docs-section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        .docs-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .docs-section h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 8px;
+        }
+
+        .docs-section h3 {
+            font-size: 1.3rem;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .docs-section p,
+        .docs-section li {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .code-block {
+            background: var(--bg-darker);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: block;
+            color: #d1d5db;
+        }
+
+        .badge-v2 {
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .docs-container {
+                flex-direction: column;
+            }
+
+            .docs-sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--glass-border);
+                padding-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav -->
+    <nav class="navbar" style="background: rgba(10, 10, 15, 0.9);">
+        <div class="container nav-content">
+            <div class="logo"><a href="index.html"
+                    style="color: inherit; text-decoration: none;">P.E.Y.E.K<span>.</span></a></div>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="docs.html">Docs</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="https://wa.me/6281328306288" target="_blank" class="btn btn-outline">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="docs-container">
+        <!-- Sidebar -->
+        <aside class="docs-sidebar">
+            <h4>Android SDK</h4>
+            <a href="#twa">Trusted Web Activity</a>
+            <a href="#webview">Native WebView</a>
+            <a href="#bridge">Java/JS Bridge</a>
+            <a href="#security">Security Setup</a>
+
+            <h4>Resources</h4>
+            <a href="docs.html">Main Documentation</a>
+            <a href="index.html">Back to Home</a>
+        </aside>
+
+        <!-- Content -->
+        <main class="docs-content">
+
+            <section id="introduction" class="docs-section">
+                <h1>Android Integration <span class="badge-v2">v2.0.0</span></h1>
+                <p>Deploy your P.E.Y.E.K web applications into native Android environments. We support two primary
+                    methods: <strong>TWA (Trusted Web Activity)</strong> for the Play Store path, and
+                    <strong>WebView</strong> for deep native integration.
+                </p>
+            </section>
+
+            <section id="twa" class="docs-section">
+                <h2>Trusted Web Activity (TWA)</h2>
+                <p>TWA is the recommended way to wrap your PWA for the Google Play Store. It uses a specialized mode of
+                    Chrome to run your web app with zero native code.</p>
+
+                <h3>1. Initialize Project</h3>
+                <div class="code-block">
+                    <code>npx @bubblewrap/cli init --manifest https://peyek.pcode.my.id/manifest.json</code>
+                </div>
+
+                <h3>2. Build signed Bundle</h3>
+                <div class="code-block">
+                    <code>npx @bubblewrap/cli build</code>
+                </div>
+
+                <h3>3. Digital Asset Links</h3>
+                <p>Deploy your <code>assetlinks.json</code> to
+                    <code>https://yourdomain.com/.well-known/assetlinks.json</code> to prove ownership and remove the
+                    URL bar.</p>
+            </section>
+
+            <section id="webview" class="docs-section">
+                <h2>Native Android WebView</h2>
+                <p>Use WebView if you want to embed P.E.Y.E.K components inside a native Android UI (like a Fragments or
+                    Activities).</p>
+
+                <h3>Configuration</h3>
+                <p>Ensure <code>DomStorageEnabled</code> is true for local theme persistence.</p>
+                <div class="code-block">
+                    <code>WebView webView = findViewById(R.id.webview);
+WebSettings s = webView.getSettings();
+
+s.setJavaScriptEnabled(true);
+s.setDomStorageEnabled(true);
+s.setDatabaseEnabled(true);
+webView.loadUrl("https://peyek.pcode.my.id");</code>
+                </div>
+            </section>
+
+            <section id="bridge" class="docs-section">
+                <h2>Java/JavaScript Bridge</h2>
+                <p>P.E.Y.E.K lets you call native Android functions directly from your web code.</p>
+
+                <h3>1. Java Side</h3>
+                <div class="code-block">
+                    <code>webView.addJavascriptInterface(new Object() {
+    @JavascriptInterface
+    public void notify(String msg) {
+        toast.show(msg);
+    }
+}, "AndroidBridge");</code>
+                </div>
+
+                <h3>2. JavaScript Side</h3>
+                <div class="code-block">
+                    <code>if (window.AndroidBridge) {
+    window.AndroidBridge.notify("Success from PEYEK Web!");
+}</code>
+                </div>
+            </section>
+
+            <section id="security" class="docs-section">
+                <h2>Security Best Practices</h2>
+                <ul>
+                    <li><strong>HTTPS Only</strong>: PWA features (Service Worker, Manifest) will not work on HTTP
+                        schemes.</li>
+                    <li><strong>Hardware Acceleration</strong>: Must be enabled for smooth Canvas/Chart rendering.</li>
+                    <li><strong>Nonce Audit</strong>: If using strict CSP, ensure your WebView client handles the nonces
+                        correctly during page injection.</li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="container footer-content" style="padding-top: 40px; border-top: 1px solid var(--glass-border);">
+            <p class="copyright">
+                Created by <strong>rteriz23</strong> Alias RULY RIZKI PERDANA S.KOM <br>
+                © 2026 Peyek OSS. Built with ❤️ for Android Developers.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js" nonce="PEYEK2026"></script>
+    <script src="protect.js" nonce="PEYEK2026"></script>
+</body>
+
+</html>

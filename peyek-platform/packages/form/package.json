@@ -1,0 +1,16 @@
+{
+    "name": "@rterizz23/peyek-form",
+    "version": "1.0.0",
+    "description": "Smart schema-driven form builder with built-in validation for P.E.Y.E.K",
+    "main": "index.js",
+    "type": "module",
+    "keywords": [
+        "form",
+        "validation",
+        "builder",
+        "peyek"
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
+}

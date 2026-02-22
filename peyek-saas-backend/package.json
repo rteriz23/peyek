@@ -1,7 +1,7 @@
 {
     "name": "peyek-saas-backend",
-    "version": "1.0.0",
-    "description": "SaaS Backend for P.E.Y.E.K Platform",
+    "version": "2.0.0",
+    "description": "SaaS Backend for P.E.Y.E.K Platform — Analytics, License, PWA & Package Monitoring",
     "main": "server.js",
     "type": "module",
     "scripts": {
@@ -9,8 +9,10 @@
         "dev": "node --watch server.js"
     },
     "dependencies": {
-        "express": "^4.18.2",
         "cors": "^2.8.5",
-        "crypto": "^1.0.1"
+        "crypto": "^1.0.1",
+        "express": "^4.18.2",
+        "express-rate-limit": "^8.2.1",
+        "helmet": "^8.1.0"
     }
 }

@@ -5,11 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P.E.Y.E.K | Build Faster. Drag Smarter. Deploy Anywhere.</title>
+    <meta name="description"
+        content="Platform Extensible Yielding Engineering Kit. 9 zero-dependency packages. PWA-ready. Works with Laravel, Yii, Yii2, CodeIgniter &amp; Android.">
+
+    <!-- ═══ OWASP Security Meta Tags ═══════════════════════════════════════ -->
+
+    <!-- A03/A05: Content Security Policy (XSS + Injection defence) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';
+                   script-src 'self';
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                   font-src 'self' https://fonts.gstatic.com;
+                   img-src 'self' data: https://img.shields.io;
+                   connect-src 'self' http://localhost:3000 https://api.npmjs.org;
+                   object-src 'none';
+                   base-uri 'self';
+                   form-action 'self';
+                   frame-ancestors 'none';">
+
+    <!-- A01: Clickjacking Protection -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <!-- A05: Prevent MIME Sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- A03: XSS Filter (legacy browsers) -->
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
+    <!-- A05: Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- A05: Permissions Policy -->
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=()">
+
+    <!-- A02: No cache for HTML (always fresh security headers) -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="P.E.Y.E.K">
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
@@ -17,43 +61,59 @@
 </head>
 
 <body>
-    <!-- Nav -->
-    <nav class="navbar">
+
+    <!-- ─── Navbar ─────────────────────────────────────────────────────── -->
+    <nav class="navbar" id="navbar">
         <div class="container nav-content">
             <div class="logo">P.E.Y.E.K<span>.</span></div>
-            <div class="nav-links">
+
+            <div class="nav-links" id="nav-links">
                 <a href="#features">Features</a>
+                <a href="#ecosystem">Packages</a>
+                <a href="#integrations">Integrations</a>
+                <a href="#creator">Creator</a>
                 <a href="docs.html">Docs</a>
                 <a href="#pricing">Pricing</a>
                 <a href="https://github.com/rteriz23/peyek" target="_blank" class="btn btn-outline">GitHub</a>
+                <button id="pwa-install-btn" class="btn btn-outline" style="display:none">📲 Install App</button>
                 <a href="https://wa.me/6281328306288?text=Halo%20Admin,%20saya%20tertarik%20untuk%20mulai%20menggunakan%20P.E.Y.E.K%20Community."
                     target="_blank" class="btn btn-primary">Get Started</a>
             </div>
+
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+
+    <!-- ─── Hero ────────────────────────────────────────────────────────── -->
     <header class="hero">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
 
         <div class="container hero-content">
-            <div class="badge">v1.2.0 is out! ✨</div>
+            <div class="badge">v1.5.0 is out! 🚀 Now with PWA & Analytics</div>
             <h1 class="hero-title">
                 The ultimate <span class="gradient-text">Engineering Kit</span><br>
                 for modern fullstack apps.
             </h1>
             <p class="hero-subtitle">
-                Platform Extensible Yielding Engineering Kit. Drag-and-drop builders, auto-modals, and PDF viewers
-                seamlessly integrated into PHP/Node legacy or modern frameworks.
+                9 zero-dependency packages. PWA-ready. Works seamlessly with
+                <strong>Laravel, Yii, Yii2, CodeIgniter</strong> and <strong>Android</strong>.
+                No bloated frameworks required.
             </p>
 
             <div class="hero-actions">
                 <a href="docs.html" class="btn btn-primary btn-large">Read Documentation</a>
                 <div class="code-snippet-box">
                     <code class="code-font">npx create-peyek-app my-app</code>
-                    <button class="copy-btn" onclick="copySnippet(this)">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button class="copy-btn" onclick="copySnippet(this)" data-value="npx create-peyek-app my-app"
+                        aria-label="Copy">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
                             </path>
@@ -61,54 +121,127 @@
                     </button>
                 </div>
             </div>
+
+            <!-- npm badges -->
+            <div class="hero-badges">
+                <a href="https://www.npmjs.com/~rterizz23" target="_blank">
+                    <img src="https://img.shields.io/npm/v/@rterizz23/peyek-core?color=6366f1&label=%40rterizz23%2Fpeyek-core&logo=npm&logoColor=white&style=flat-square"
+                        alt="npm version" loading="lazy">
+                </a>
+                <a href="https://github.com/rteriz23/peyek" target="_blank">
+                    <img src="https://img.shields.io/github/license/rteriz23/peyek?color=10b981&style=flat-square"
+                        alt="License" loading="lazy">
+                </a>
+                <a href="https://www.npmjs.com/~rterizz23" target="_blank">
+                    <img src="https://img.shields.io/npm/dm/@rterizz23/peyek-core?color=ec4899&label=downloads%2Fmo&style=flat-square"
+                        alt="Downloads" loading="lazy">
+                </a>
+            </div>
         </div>
 
-        <!-- Hero Mockup/Illustration -->
+        <!-- Hero Mockup -->
         <div class="hero-mockup">
             <div class="glass-panel">
                 <div class="panel-header">
                     <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                    <span class="panel-title">builder.js</span>
+                    <span class="panel-title">peyek-app/builder.js</span>
                 </div>
                 <div class="panel-body code-font">
                     <span class="keyword">import</span> { UIBuilder } <span class="keyword">from</span> <span
-                        class="string">'@rterizz23/peyek-ui-builder'</span>;<br><br>
-                    <span class="comment">// Initialize the Drag & Drop Web Builder</span><br>
+                        class="string">'@rterizz23/peyek-ui-builder'</span>;<br>
+                    <span class="keyword">import</span> { PwaManager } <span class="keyword">from</span> <span
+                        class="string">'@rterizz23/peyek-pwa'</span>;<br>
+                    <span class="keyword">import</span> { PeyekToast } <span class="keyword">from</span> <span
+                        class="string">'@rterizz23/peyek-toast'</span>;<br><br>
+                    <span class="comment">// Initialize Drag &amp; Drop Web Builder</span><br>
                     <span class="keyword">const</span> builder <span class="operator">=</span> <span
                         class="keyword">new</span> UIBuilder(<span class="string">'#app'</span>);<br>
                     builder.<span class="function">render</span>();<br><br>
-                    <span class="comment">// Instantly transform legacy pages to dynamic UIs</span><br>
-                    console.<span class="function">log</span>(<span class="string">"PEYEK is Ready 🚀"</span>);
+                    <span class="comment">// Enable Instant PWA — works everywhere</span><br>
+                    PwaManager.<span class="function">init</span>({ name: <span class="string">'My App'</span>,
+                    themeColor: <span class="string">'#6366f1'</span> });<br><br>
+                    PeyekToast.<span class="function">success</span>(<span class="string">'PEYEK is Ready 🚀'</span>);
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Features Section -->
+    <!-- ─── Stats Section ────────────────────────────────────────────────── -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <div class="stat-value" data-counter="0" data-target="0" id="stat-visitors">—</div>
+                    <div class="stat-label">Web Visitors</div>
+                    <div class="stat-sub">tracked this session</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" data-counter="npm" id="stat-downloads">—</div>
+                    <div class="stat-label">Monthly Downloads</div>
+                    <div class="stat-sub">across all packages</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" data-counter="static" data-target="9">9</div>
+                    <div class="stat-label">Packages</div>
+                    <div class="stat-sub">published on npm</div>
+                </div>
+                <div class="stat-card glass">
+                    <div class="stat-value" data-counter="static" data-target="5">5</div>
+                    <div class="stat-label">Frameworks</div>
+                    <div class="stat-sub">Laravel · Yii · CI · Android</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Features ─────────────────────────────────────────────────────── -->
     <section id="features" class="features">
         <div class="container">
             <div class="section-header">
-                <h2>Built for <span class="gradient-text">Speed & Scale</span></h2>
-                <p>A unified suite of tools designed to bypass weeks of development.</p>
+                <div class="section-badge">✨ What's Inside</div>
+                <h2>Built for <span class="gradient-text">Speed &amp; Scale</span></h2>
+                <p>A unified suite of zero-dependency tools designed to bypass weeks of development.</p>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-card glass">
                     <div class="feature-icon">🪄</div>
                     <h3>Auto Modal</h3>
-                    <p>Zero-dependency modals generated dynamically. Bypasses bulky CSS frameworks like Bootstrap while
-                        looking stunning.</p>
+                    <p>Zero-dependency modals generated dynamically. Bypasses bulky CSS frameworks while looking
+                        stunning.</p>
                 </div>
                 <div class="feature-card glass">
                     <div class="feature-icon">🧩</div>
-                    <h3>Drag & Drop UI</h3>
+                    <h3>Drag &amp; Drop UI</h3>
                     <p>Embeddable web builder inside your own SaaS. Let your users create pages without writing code.
                     </p>
                 </div>
                 <div class="feature-card glass">
                     <div class="feature-icon">📄</div>
                     <h3>PDF Auto Previewer</h3>
-                    <p>Safely isolated PDF rendering wrapper out of the box. Highly optimized Web Worker execution.</p>
+                    <p>Safely isolated PDF rendering wrapper. Highly optimized Web Worker execution out of the box.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">📲</div>
+                    <h3>Instant PWA</h3>
+                    <p>One function call to register a service worker, inject a manifest, and enable Install App prompt.
+                    </p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">📊</div>
+                    <h3>Zero-Dep Charts</h3>
+                    <p>Line, Bar, and Donut charts powered by the native Canvas API. No Chart.js or D3 required.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">📋</div>
+                    <h3>Smart Data Table</h3>
+                    <p>Sortable, searchable, and paginated data table that renders in any container. Pure DOM magic.</p>
+                </div>
+                <div class="feature-card glass">
+                    <div class="feature-icon">✏️</div>
+                    <h3>Form Builder</h3>
+                    <p>Schema-driven form generator with client-side validation, loading states, and async submit
+                        handler.</p>
                 </div>
                 <div class="feature-card glass">
                     <div class="feature-icon">🔌</div>
@@ -120,12 +253,191 @@
         </div>
     </section>
 
-    <!-- Pricing -->
+    <!-- ─── Ecosystem (Packages) ──────────────────────────────────────────── -->
+    <section id="ecosystem" class="ecosystem">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">📦 npm Packages</div>
+                <h2>The <span class="gradient-text">P.E.Y.E.K Ecosystem</span></h2>
+                <p>Install only what you need. Every package is independent and lightweight.</p>
+            </div>
+
+            <div class="pkg-grid" id="pkg-grid">
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">⚙️</div>
+                    <div class="pkg-info">
+                        <h4>peyek-core</h4>
+                        <p>Core utilities &amp; modal system</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-core</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">🧩</div>
+                    <div class="pkg-info">
+                        <h4>peyek-ui-builder</h4>
+                        <p>Drag &amp; drop visual page builder</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-ui-builder</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">📄</div>
+                    <div class="pkg-info">
+                        <h4>peyek-pdf-viewer</h4>
+                        <p>Isolated PDF renderer (Web Worker)</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-pdf-viewer</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">📲</div>
+                    <div class="pkg-info">
+                        <h4>peyek-pwa</h4>
+                        <p>Instant PWA: SW + manifest + install</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-pwa</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">📊</div>
+                    <div class="pkg-info">
+                        <h4>peyek-charts</h4>
+                        <p>Canvas-based line, bar &amp; donut charts</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-charts</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">📋</div>
+                    <div class="pkg-info">
+                        <h4>peyek-table</h4>
+                        <p>Sortable, searchable, paginated table</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-table</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">✏️</div>
+                    <div class="pkg-info">
+                        <h4>peyek-form</h4>
+                        <p>Schema-driven form builder + validation</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-form</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">🔔</div>
+                    <div class="pkg-info">
+                        <h4>peyek-toast</h4>
+                        <p>Animated toast notifications</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-toast</div>
+                    </div>
+                </div>
+                <div class="pkg-card glass">
+                    <div class="pkg-icon">🌙</div>
+                    <div class="pkg-info">
+                        <h4>peyek-theme</h4>
+                        <p>Dark/light theme manager + localStorage</p>
+                        <div class="pkg-install code-font">npm i @rterizz23/peyek-theme</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Integrations ─────────────────────────────────────────────────── -->
+    <section id="integrations" class="integrations">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">🔌 Integrations</div>
+                <h2>Works with <span class="gradient-text">Your Stack</span></h2>
+                <p>Drop P.E.Y.E.K into any project — PHP, Node.js, or native Android.</p>
+            </div>
+
+            <div class="integration-grid">
+                <a href="docs.html#laravel" class="integration-card glass">
+                    <div class="integration-logo">🟥</div>
+                    <div class="integration-name">Laravel</div>
+                    <div class="integration-desc">Blade views · Vite · Artisan</div>
+                </a>
+                <a href="docs.html#yii2" class="integration-card glass">
+                    <div class="integration-logo">🟦</div>
+                    <div class="integration-name">Yii2</div>
+                    <div class="integration-desc">Asset Bundles · Views · Gii</div>
+                </a>
+                <a href="docs.html#yii" class="integration-card glass">
+                    <div class="integration-logo">🔷</div>
+                    <div class="integration-name">Yii 1.x</div>
+                    <div class="integration-desc">CClientScript · Layouts</div>
+                </a>
+                <a href="docs.html#codeigniter" class="integration-card glass">
+                    <div class="integration-logo">🟠</div>
+                    <div class="integration-name">CodeIgniter</div>
+                    <div class="integration-desc">CI3 &amp; CI4 · Views · Public</div>
+                </a>
+                <a href="docs.html#android" class="integration-card glass">
+                    <div class="integration-logo">🤖</div>
+                    <div class="integration-name">Android</div>
+                    <div class="integration-desc">TWA · WebView · Play Store</div>
+                </a>
+                <a href="docs.html#nodejs" class="integration-card glass">
+                    <div class="integration-logo">🟢</div>
+                    <div class="integration-name">Node.js</div>
+                    <div class="integration-desc">ESM · CommonJS · Rollup · Vite</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PWA Demo Section ──────────────────────────────────────────────── -->
+    <section class="pwa-cta">
+        <div class="container pwa-cta-content">
+            <div class="pwa-cta-text">
+                <div class="section-badge">📲 Instant PWA</div>
+                <h2>Build Once. <span class="gradient-text">Deploy Everywhere.</span></h2>
+                <p>
+                    One function call adds full PWA support to your existing web project.
+                    Offline support, install prompt, service worker — all included.
+                    Then publish to Android via <strong>Trusted Web Activity (TWA)</strong> in minutes.
+                </p>
+                <div class="pwa-steps">
+                    <div class="pwa-step"><span class="step-num">1</span> <code
+                            class="code-font">npm i @rterizz23/peyek-pwa</code></div>
+                    <div class="pwa-step"><span class="step-num">2</span> <code
+                            class="code-font">PwaManager.init({ name: 'MyApp' })</code></div>
+                    <div class="pwa-step"><span class="step-num">3</span> <span>📲 Users can now install your
+                            app!</span></div>
+                </div>
+                <div class="pwa-cta-btns">
+                    <a href="docs.html#pwa" class="btn btn-primary">PWA Docs</a>
+                    <a href="peyek-platform/packages/pwa/integrations/android.md" class="btn btn-outline">Android
+                        Guide</a>
+                </div>
+            </div>
+            <div class="pwa-device">
+                <div class="device-mockup">
+                    <div class="device-screen glass">
+                        <div class="device-notch"></div>
+                        <div class="device-content">
+                            <div class="app-bar">
+                                <span class="app-title code-font">P.E.Y.E.K</span>
+                                <span class="app-indicator">📶</span>
+                            </div>
+                            <div class="app-body">
+                                <div class="app-card glass">🧩 UI Builder ready</div>
+                                <div class="app-card glass">📊 Charts loaded</div>
+                                <div class="app-card glass">📲 PWA installed ✓</div>
+                                <div class="app-card glass">🌙 Dark mode active</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="device-home-bar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Pricing ───────────────────────────────────────────────────────── -->
     <section id="pricing" class="pricing">
         <div class="container">
             <div class="section-header">
+                <div class="section-badge">💰 Pricing</div>
                 <h2>Simple, <span class="gradient-text">Transparent</span> Pricing</h2>
-                <p>Open Source at its core. Premium tools for serious businesses.</p>
+                <p>Open Source at its core. Premium tools for serious builders.</p>
             </div>
 
             <div class="pricing-grid" style="grid-template-columns: 1fr; max-width: 600px; margin: 0 auto;">
@@ -133,12 +445,14 @@
                     <div class="popular-badge">100% Open Source</div>
                     <h3>Community Edition</h3>
                     <div class="price">$0<span>/forever</span></div>
-                    <p>P.E.Y.E.K is proudly open-source and free to use for any commercial or personal projects.</p>
+                    <p>P.E.Y.E.K is proudly open-source and free to use for any commercial or personal project.</p>
                     <ul class="price-features">
+                        <li>✔ All 9 npm Packages</li>
                         <li>✔ Full Source Code Access</li>
-                        <li>✔ Core SDK & UI Builder</li>
-                        <li>✔ Standard API Wrapper</li>
-                        <li>✔ PDF Previewer</li>
+                        <li>✔ PWA Toolkit + Framework Guides</li>
+                        <li>✔ Analytics &amp; Monitoring API</li>
+                        <li>✔ SaaS Backend Included</li>
+                        <li>✔ Android TWA Support</li>
                         <li>✔ Community Support</li>
                     </ul>
                     <a href="https://wa.me/6281328306288?text=Halo%20Admin,%20saya%20tertarik%20untuk%20mulai%20mengembangkan%20dengan%20P.E.Y.E.K%20Community%20(Gratis)."
@@ -148,42 +462,159 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ─── Footer ────────────────────────────────────────────────────────── -->
+    <!-- ─── Creator Section ───────────────────────────────────────────────── -->
+    <section id="creator" class="creator-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">👨‍💻 Meet the Creator</div>
+                <h2>The <span class="gradient-text">Mind Behind P.E.Y.E.K</span></h2>
+            </div>
+
+            <div class="creator-card glass">
+
+                <!-- Left: Photo -->
+                <div class="creator-photo-col">
+                    <div class="creator-photo-wrap">
+                        <img src="creator-photo.jpg" alt="Ruly Rizki Perdana" class="creator-photo"
+                            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                        <!-- Fallback avatar if photo not found -->
+                        <div class="creator-avatar-fallback" style="display:none">
+                            <span>RRP</span>
+                        </div>
+                        <div class="creator-glow"></div>
+                    </div>
+                    <div class="creator-title-badge">TECH LEAD / TRAINER<br>GOOGLE TRAINER / CTO</div>
+                    <div class="creator-actions">
+                        <a href="https://wa.me/6281328306288" target="_blank" class="btn btn-primary">💬 Contact</a>
+                        <a href="https://github.com/rteriz23" target="_blank" class="btn btn-outline">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Right: Info -->
+                <div class="creator-info-col">
+
+                    <!-- Name -->
+                    <h2 class="creator-name">Ruly Rizki Perdana</h2>
+                    <div class="creator-certs code-font">
+                        S.Kom · MOS · MTA · MTCNA · OCA · GCE · GCCS · GCF · CCEP ·
+                        ISMS · PMEC · QMS · GDPR · CIP · CASF · IBM-CGO · IBM-DSFW · IBM-GASD · IBM-GMSD
+                    </div>
+
+                    <!-- Description -->
+                    <p class="creator-desc">
+                        Tech Lead yang dapat memanage teamnya secara proper beserta prospect, selalu sabar
+                        membimbing agar terus tercipta Goals &amp; Wants keinginan setiap teamnya agar bisa
+                        <em>achieve</em> dan terwujud — dengan tips, trick bimbingan, ide &amp; saran masukan
+                        yang selalu dianalisa agar semua team bisa melakukannya dan berkembang sangat pesat.
+                    </p>
+                    <p class="creator-desc">
+                        Merupakan <strong>developer worth-it</strong> dan penganalisa +
+                        <strong>QA Testing Expert</strong> — 1-5 bug aja bisa diketahui secara cepat.
+                        Gokilll Sekali 🔥 Sangat siap berkontribusi dan membimbing seluruh Teamnya!
+                    </p>
+
+                    <!-- Skills Grid -->
+                    <div class="creator-skills-label">Skills &amp; Expertise</div>
+                    <div class="creator-skills">
+                        <span class="skill-tag">PROGRAMMER</span>
+                        <span class="skill-tag">R&amp;D</span>
+                        <span class="skill-tag">ENGINEER</span>
+                        <span class="skill-tag">PYTHON</span>
+                        <span class="skill-tag">VIRTUAL BOX</span>
+                        <span class="skill-tag">YII</span>
+                        <span class="skill-tag highlight">YII2</span>
+                        <span class="skill-tag highlight">CODEIGNITER</span>
+                        <span class="skill-tag highlight">PHP</span>
+                        <span class="skill-tag highlight">LARAVEL</span>
+                        <span class="skill-tag">CYBER SECURITY</span>
+                        <span class="skill-tag">QA TESTER</span>
+                        <span class="skill-tag">QA ANALYST</span>
+                        <span class="skill-tag">SOFTWARE ANALYST</span>
+                        <span class="skill-tag">PHOTOGRAPHER</span>
+                        <span class="skill-tag">MOODLE</span>
+                        <span class="skill-tag">TAILWIND</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">POSTGRESQL</span>
+                        <span class="skill-tag">ADVANCED SQL</span>
+                        <span class="skill-tag">AI EXPLORER</span>
+                        <span class="skill-tag">IT TRAINER</span>
+                        <span class="skill-tag">LECTURER</span>
+                        <span class="skill-tag">GITHUB</span>
+                        <span class="skill-tag">DAKAR</span>
+                        <span class="skill-tag">BIKERS</span>
+                        <span class="skill-tag">RACER-X</span>
+                        <span class="skill-tag">INOVATOR</span>
+                        <span class="skill-tag accent">GOOGLE EDUCATOR</span>
+                        <span class="skill-tag accent">GEMINI EDUCATOR</span>
+                        <span class="skill-tag accent">GOOGLE K-12</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container footer-content">
             <div class="footer-brand">
                 <h3>P.E.Y.E.K<span>.</span></h3>
                 <p>Platform Extensible Yielding Engineering Kit.</p>
                 <p class="copyright">
-                    Created by <strong>rteriz23</strong> <br>
-                    Alias RULY RIZKI PERDANA S.KOM <br>
+                    Created by <strong>rteriz23</strong><br>
+                    RULY RIZKI PERDANA S.KOM<br>
                     © 2026 Peyek OSS. All rights reserved.
                 </p>
+                <div class="footer-social">
+                    <a href="https://github.com/rteriz23/peyek" target="_blank" class="social-link" aria-label="GitHub">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" />
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/6281328306288" target="_blank" class="social-link" aria-label="WhatsApp">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.npmjs.com/~rterizz23" target="_blank" class="social-link" aria-label="npm">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M0 0v24h24V0H0zm6.672 18.906H3.328V5.094H6.67v13.812zm7.22 0h-3.344V8.438h-1.67v10.468H5.534V5.094h8.358v13.812zm7.436 0h-1.672V8.438H18V5.094h3.328v13.812z" />
+                        </svg>
+                    </a>
+                </div>
             </div>
             <div class="footer-links">
                 <div>
-                    <h4>Product</h4>
-                    <a href="#">Features</a>
-                    <a href="#">Integrations</a>
-                    <a href="#">Pricing</a>
+                    <h4>Packages</h4>
+                    <a href="docs.html">peyek-core</a>
+                    <a href="docs.html">peyek-ui-builder</a>
+                    <a href="docs.html">peyek-pwa</a>
+                    <a href="docs.html">peyek-charts</a>
+                    <a href="docs.html">peyek-table</a>
                 </div>
                 <div>
                     <h4>Resources</h4>
-                    <a href="#">Documentation</a>
-                    <a href="#">Tutorials</a>
-                    <a href="#">Blog</a>
+                    <a href="docs.html">Documentation</a>
+                    <a href="docs.html#pwa">PWA Guide</a>
+                    <a href="docs.html#api">API Reference</a>
+                    <a href="https://github.com/rteriz23/peyek" target="_blank">GitHub</a>
                 </div>
                 <div>
-                    <h4>Company</h4>
-                    <a href="#">About Us</a>
-                    <a href="#">Careers</a>
-                    <a href="#">Contact</a>
+                    <h4>Integrations</h4>
+                    <a href="docs.html#laravel">Laravel</a>
+                    <a href="docs.html#yii2">Yii2</a>
+                    <a href="docs.html#codeigniter">CodeIgniter</a>
+                    <a href="docs.html#android">Android</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script src="protect.js"></script>
 </body>
 
 </html>

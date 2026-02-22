@@ -1,0 +1,16 @@
+{
+    "name": "@rterizz23/peyek-theme",
+    "version": "1.0.0",
+    "description": "Dark/light theme manager with localStorage persistence for P.E.Y.E.K",
+    "main": "index.js",
+    "type": "module",
+    "keywords": [
+        "theme",
+        "dark-mode",
+        "light-mode",
+        "peyek"
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
+}

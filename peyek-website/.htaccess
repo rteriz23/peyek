@@ -1,0 +1,125 @@
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  P.E.Y.E.K Website — Apache Security Config                     ║
+# ║  OWASP Top 10 Hardening                                         ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# ─── Force HTTPS (A02: Cryptographic Failures) ─────────────────────
+# Uncomment when SSL certificate is installed:
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# ─── Security Headers (A05: Security Misconfiguration) ─────────────
+<IfModule mod_headers.c>
+
+    # A03 / A05 — Content Security Policy (XSS Defence)
+    Header always set Content-Security-Policy "\
+        default-src 'self'; \
+        script-src 'self' 'nonce-PEYEK2026'; \
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+        font-src 'self' https://fonts.gstatic.com; \
+        img-src 'self' data: https://img.shields.io https://api.npmjs.org; \
+        connect-src 'self' http://localhost:3000 https://api.npmjs.org https://shields.io; \
+        object-src 'none'; \
+        base-uri 'self'; \
+        form-action 'self'; \
+        frame-ancestors 'none'; \
+        upgrade-insecure-requests"
+
+    # A01 — Clickjacking Protection
+    Header always set X-Frame-Options "DENY"
+
+    # A03 — XSS Filter (legacy browsers)
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # A05 — Prevent MIME Type Sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # A02 — HSTS (Strict Transport Security) — enable when HTTPS ready
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # A05 — Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # A05 — Permissions Policy (disable unneeded APIs)
+    Header always set Permissions-Policy "\
+        geolocation=(), \
+        microphone=(), \
+        camera=(), \
+        payment=(), \
+        usb=(), \
+        bluetooth=(), \
+        accelerometer=(), \
+        gyroscope=()"
+
+    # A05 — Remove server fingerprint headers
+    Header always unset X-Powered-By
+    Header always unset Server
+
+    # A08 — Cross-Origin Resource Policy
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Embedder-Policy "require-corp"
+
+</IfModule>
+
+# ─── Cache Control (A02: Cryptographic Failures) ──────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    # HTML: no-cache to always get fresh security headers
+    ExpiresByType text/html                  "access plus 0 seconds"
+    # Service Worker: must not be cached
+    <FilesMatch "sw\.js$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+    </FilesMatch>
+    ExpiresByType text/css                   "access plus 1 year"
+    ExpiresByType application/javascript     "access plus 1 year"
+    ExpiresByType image/png                  "access plus 1 year"
+    ExpiresByType image/jpg                  "access plus 1 year"
+    ExpiresByType image/jpeg                 "access plus 1 year"
+    ExpiresByType image/webp                 "access plus 1 year"
+    ExpiresByType application/manifest+json  "access plus 1 hour"
+</IfModule>
+
+# ─── Block Sensitive File Access (A05: Security Misconfiguration) ──
+<FilesMatch "\.(git|env|json|lock|log|md|bak|sql|sh|py|rb|pl|htpasswd)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# Allow manifest.json specifically (needed for PWA)
+<Files "manifest.json">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+</Files>
+
+# ─── Block Directory Listing (A01: Broken Access Control) ──────────
+Options -Indexes
+
+# ─── Block Bad User Agents (A05) ───────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|nessus|masscan|zgrab|python-requests|curl/) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ─── Limit Request Methods (A01) ───────────────────────────────────
+<LimitExcept GET POST HEAD OPTIONS>
+    Deny from all
+</LimitExcept>
+
+# ─── XSS: Block requests with script tags in URL (A03) ─────────────
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+    RewriteRule .* index.html [F,L]
+</IfModule>
+
+# ─── Gzip Compression (Performance) ────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+</IfModule>

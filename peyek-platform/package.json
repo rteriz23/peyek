@@ -1,6 +1,6 @@
 {
   "name": "peyek-platform",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Platform Extensible Yielding Engineering Kit",
   "private": true,
   "workspaces": [

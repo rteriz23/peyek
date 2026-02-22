@@ -1,0 +1,17 @@
+{
+    "name": "@rterizz23/peyek-table",
+    "version": "1.0.0",
+    "description": "Sortable, searchable, paginated data table plugin for P.E.Y.E.K",
+    "main": "index.js",
+    "type": "module",
+    "keywords": [
+        "table",
+        "datatable",
+        "sort",
+        "search",
+        "peyek"
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
+}

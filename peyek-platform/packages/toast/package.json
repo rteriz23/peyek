@@ -1,0 +1,16 @@
+{
+    "name": "@rterizz23/peyek-toast",
+    "version": "1.0.0",
+    "description": "Zero-dependency toast notification system for P.E.Y.E.K",
+    "main": "index.js",
+    "type": "module",
+    "keywords": [
+        "toast",
+        "notification",
+        "alert",
+        "peyek"
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
+}

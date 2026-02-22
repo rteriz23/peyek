@@ -1,6 +1,6 @@
 {
     "name": "create-peyek-app",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "CLI to scaffold a new P.E.Y.E.K project",
     "main": "bin/index.js",
     "bin": {
